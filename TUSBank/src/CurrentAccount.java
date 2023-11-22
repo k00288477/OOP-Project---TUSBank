@@ -18,6 +18,8 @@ public class CurrentAccount extends Account {
     }
 
     //getters & setters
+    //inherited from Account
+
 
     public static double getCurrentAccAir() {
         return currentAccAir;
