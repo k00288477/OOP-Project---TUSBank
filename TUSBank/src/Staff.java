@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Staff extends Person {
     //attributes
     private int staffId;
@@ -46,9 +49,32 @@ public class Staff extends Person {
 
     //methods
     //Note: methods set to protected as they will only be accessed by sub classes
-    protected void createNewCustomer(){}
+    protected void createNewCustomer(ArrayList<Customer> customers){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please Enter the account details");
+        // Define the attributes in an array
+        String[] attributeNames = {"Customer id", "First Name", "Last Name", "House Number", "Street", "City", "Eircode"};
+        String[] attributeValues = new String[attributeNames.length];
 
-    protected void createNewCurrentAccount(){}
+        // Use a for loop to ask the user to input values for each attribute
+        for (int i = 0; i < attributeNames.length; i++) {
+            System.out.println(attributeNames[i] + ":");
+            attributeValues[i] = sc.next();
+        }
+
+        // Build the objects
+        Address a = new Address(attributeValues[3], attributeValues[4], attributeValues[5], attributeValues[6]);
+        Customer c = new Customer(Integer.parseInt(attributeValues[0]), attributeValues[1], attributeValues[2], a);
+
+        // Add the created customer to the ArrayList
+        customers.add(c);
+    }
+
+
+    protected void createNewCurrentAccount(){
+
+
+    }
 
     protected void createNewDepositAccount(){}
 

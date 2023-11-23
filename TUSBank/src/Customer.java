@@ -1,17 +1,28 @@
 public class Customer extends Person{
     //attributes
-    //no unique attributes
+    private int custId;
 
     //constructors
     protected Customer(
+            int custId,
             String firstName,
             String lastName,
             Address address
     ) {
         super(firstName, lastName, address);
+        this.custId = custId;
     }
 
     //getters & setters
+
+
+    public int getCustId() {
+        return custId;
+    }
+
+    public void setCustId(int custId) {
+        this.custId = custId;
+    }
 
     //methods
     private void depositMoney(){}
