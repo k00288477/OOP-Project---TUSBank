@@ -54,7 +54,7 @@ public class Main {
             } else if (userInput == 2) {
                 withdrawFunds();
             } else if (userInput == 3) {
-                checkBalance(accounts);
+                checkBalance(accounts, customers);
             } else if (userInput == 4) {
                 staffMenu(accounts, staffMembers, customers);
             } else System.exit(0);
@@ -62,19 +62,19 @@ public class Main {
     }
 
     //Customer checks balance
-    private static void checkBalance(ArrayList<Account> accounts) {
+    private static void checkBalance(ArrayList<Account> accounts, ArrayList<Customer> customers) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Check Balance");
         //ask the user for their account number
-        System.out.println("Please Enter your account number");
-        int accNo = Integer.parseInt(sc.next());
-        //search the array list for the account
+        System.out.println("Please Enter your Customer number");
+        int custNo = Integer.parseInt(sc.next());
+        //search the array list for the account with th corresponding customer number
         for(int i = 0; i < accounts.size(); i++){
-            Account current = accounts.get(i);
+            Account acc = accounts.get(i);
             //compare input to the accounts customer number
-            if (accNo == current.getAcountId()){
+            if (custNo == acc.getCustId()){
                 System.out.println(
-                        "\nYour Balance: " + current.getBalance());
+                        "\nYour Balance: " + acc.getBalance());
             }
         }
 
@@ -93,7 +93,7 @@ public class Main {
                 //display the menu
                 staff = staffMembers.get(i);
                 System.out.println(
-                        "\nStaff Menu\n1. Create new Customer\n2. Create New Current Account\n3. Create New Deposit Account\n4. Change Current Account AIR\n5. Change deposit Account AIR\n6. Change Overdraft\n7. Print All"
+                        "\nStaff Menu\n1. Create new Customer\n2. Create New Current Account\n3. Create New Deposit Account\n4. Change Current Account AIR\n5. Change deposit Account AIR\n6. Change Overdraft\n7. Cancel"
                 );
             } else {
                 //do not display the menu
@@ -104,8 +104,16 @@ public class Main {
         if(staffInput == 1){
             staff.createNewCustomer(customers);
         } else if (staffInput == 2) {
-
-        }
+            staff.createNewCurrentAccount(accounts);
+        } else if (staffInput == 3) {
+            staff.createNewDepositAccount(accounts);
+        } else if (staffInput == 4) {
+            staff.changeCurrentAccAIR();
+        } else if (staffInput == 5) {
+            staff.changeDepositAccAIR();
+        } else if (staffInput == 6) {
+            staff.changeOverdraft();
+        } else System.exit(0);
     }
 
     private static void withdrawFunds() {

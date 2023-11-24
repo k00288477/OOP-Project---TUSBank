@@ -2,19 +2,19 @@ import java.time.LocalDate;
 
 public abstract class Account {
     //attributes
-    private int acountId;
+    private int accountId;
     private int custId;
     private double balance;
     private LocalDate dateCreated;
 
     //constructors
     protected Account(
-            int acountId,
+            int accountId,
             int custId,
             double balance,
             LocalDate dateCreated
     ) {
-        this.acountId = acountId;
+        this.accountId = accountId;
         this.custId = custId;
         this.balance = balance;
         this.dateCreated = dateCreated;
@@ -22,12 +22,12 @@ public abstract class Account {
 
     //getters&setters
 
-    public int getAcountId() {
-        return acountId;
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setAcountId(int acountId) {
-        this.acountId = acountId;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
     public int getCustId() {
@@ -63,7 +63,7 @@ public abstract class Account {
                 "Account ID: %d," +
                         "\nCustomer ID: %d," +
                         "\nBalance: €%.2f," +
-                        "\nDate Created: %s", getAcountId(), getCustId(), getBalance(), getDateCreated()
+                        "\nDate Created: %s", getAccountId(), getCustId(), getBalance(), getDateCreated()
         );
     }
 }

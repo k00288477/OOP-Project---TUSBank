@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -71,12 +72,48 @@ public class Staff extends Person {
     }
 
 
-    protected void createNewCurrentAccount(){
+    protected void createNewCurrentAccount(ArrayList<Account> accounts){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please Enter the current account details");
+        // Define the attributes in an array
+        String[] attributeNames = {"Account id", "Customer Id", "Balance", "Year", "Month", "Day", "Overdraft"};
+        String[] attributeValues = new String[attributeNames.length];
 
+        // Use a for loop to ask the user to input values for each attribute
+        for (int i = 0; i < attributeNames.length; i++) {
+            System.out.println(attributeNames[i] + ":");
+            attributeValues[i] = sc.next();
+        }
+
+        // Build the objects
+        LocalDate a = LocalDate.of(Integer.parseInt(attributeValues[3]), Integer.parseInt(attributeValues[4]), Integer.parseInt(attributeValues[5]));
+        CurrentAccount c = new CurrentAccount(Integer.parseInt(attributeValues[0]), Integer.parseInt(attributeValues[1]), Double.parseDouble(attributeValues[2]), a, Double.parseDouble(attributeValues[6]));
+
+        // Add the created customer to the ArrayList
+        accounts.add(c);
 
     }
 
-    protected void createNewDepositAccount(){}
+    protected void createNewDepositAccount(ArrayList<Account> accounts){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please Enter the deposit account details");
+        // Define the attributes in an array
+        String[] attributeNames = {"Account id", "Customer Id", "Balance", "Year", "Month", "Day", "Overdraft"};
+        String[] attributeValues = new String[attributeNames.length];
+
+        // Use a for loop to ask the user to input values for each attribute
+        for (int i = 0; i < attributeNames.length; i++) {
+            System.out.println(attributeNames[i] + ":");
+            attributeValues[i] = sc.next();
+        }
+
+        // Build the objects
+        LocalDate a = LocalDate.of(Integer.parseInt(attributeValues[3]), Integer.parseInt(attributeValues[4]), Integer.parseInt(attributeValues[5]));
+        DepositAccount d = new DepositAccount(Integer.parseInt(attributeValues[0]), Integer.parseInt(attributeValues[1]), Double.parseDouble(attributeValues[2]), a);
+
+        // Add the created customer to the ArrayList
+        accounts.add(d);
+    }
 
     protected void changeDepositAccAIR(){}
 

@@ -6,12 +6,12 @@ public class DepositAccount extends Account {
 
     //constructors
     public DepositAccount(
-            int acountId,
+            int accountId,
             int custId,
             double balance,
             LocalDate dateCreated
     ) {
-        super(acountId, custId, balance, dateCreated);
+        super(accountId, custId, balance, dateCreated);
     }
 
     //getters & setters
