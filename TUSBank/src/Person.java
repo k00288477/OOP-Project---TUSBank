@@ -5,6 +5,8 @@ public abstract class Person {
     private Address address;
 
     //constructors
+    protected Person(){}
+
     protected Person(String firstName,
                      String lastName,
                      Address address

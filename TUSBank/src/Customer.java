@@ -6,7 +6,9 @@ public class Customer extends Person{
     private int custId;
 
     //constructors
-    protected Customer(
+    public Customer(){}
+
+    public Customer(
             int custId,
             String firstName,
             String lastName,
@@ -62,9 +64,26 @@ public class Customer extends Person{
     }
 
 
-    private double checkBalance() {
+    public void checkBalance(int custNo, ArrayList<CurrentAccount> currentAccounts, ArrayList<DepositAccount> depositAccounts) {
+        //search the account arraylists for the account with the corresponding customer number
+        double currentAccBal = 0;
+        for(int i = 0; i < currentAccounts.size(); i++){
+            CurrentAccount currentAccount = currentAccounts.get(i);
+            //compare input to the accounts customer number
+            if (custNo == currentAccount.getCustId()){
+                currentAccBal = currentAccount.getBalance();
+            }
+        }
+        double depositAccBal = 0;
+        for(int i = 0; i < depositAccounts.size(); i++){
+            DepositAccount depositAccount = depositAccounts.get(i);
+            //compare input to the accounts customer number
+            if (custNo == depositAccount.getCustId()){
+                depositAccBal = depositAccount.getBalance();
+            }
+        }
 
-            return 0;
+        System.out.printf("Current Account Balance: €%.2f\nDeposit Account Balance: €%.2f\n", currentAccBal, depositAccBal);
     }
 
     private void logOut(){}
