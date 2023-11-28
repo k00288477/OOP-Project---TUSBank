@@ -72,7 +72,7 @@ public class Staff extends Person {
     }
 
 
-    protected void createNewCurrentAccount(ArrayList<CurrentAccount> currentAccounts){
+    protected void createNewCurrentAccount(ArrayList<Account> accounts){
         Scanner sc = new Scanner(System.in);
         System.out.println("Please Enter the current account details");
         // Define the attributes in an array
@@ -90,11 +90,11 @@ public class Staff extends Person {
         CurrentAccount c = new CurrentAccount(Integer.parseInt(attributeValues[0]), Integer.parseInt(attributeValues[1]), Double.parseDouble(attributeValues[2]), a, Double.parseDouble(attributeValues[6]));
 
         // Add the created customer to the ArrayList
-        currentAccounts.add(c);
+        accounts.add(c);
 
     }
 
-    protected void createNewDepositAccount(ArrayList<DepositAccount> depositAccounts){
+    protected void createNewDepositAccount(ArrayList<Account> accounts){
         Scanner sc = new Scanner(System.in);
         System.out.println("Please Enter the deposit account details");
         // Define the attributes in an array
@@ -112,7 +112,7 @@ public class Staff extends Person {
         DepositAccount d = new DepositAccount(Integer.parseInt(attributeValues[0]), Integer.parseInt(attributeValues[1]), Double.parseDouble(attributeValues[2]), a);
 
         // Add the created customer to the ArrayList
-        depositAccounts.add(d);
+        accounts.add(d);
     }
 
     protected void changeDepositAccAIR(){}
@@ -121,7 +121,6 @@ public class Staff extends Person {
 
     protected void changeOverdraft(){}
 
-    //TODO change method to return the Array List of accounts
     protected void printAllAccounts(){}
 
 

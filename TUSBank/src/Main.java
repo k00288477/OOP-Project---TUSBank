@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
         //current accs
         LocalDate x = LocalDate.of(2023, 11, 22);
         CurrentAccount c1 = new CurrentAccount(1, 1000, 200.20, x, 0.5);
@@ -33,6 +32,8 @@ public class Main {
         BankManager bm1 = new BankManager("John", "Boyega", a1, 1234, Position.BANKMANAGER, 50000.00);
 
         //initialise array lists
+        ArrayList<Account> TUSaccounts = new ArrayList<>();
+
         ArrayList<CurrentAccount> currentAccounts = new ArrayList<>();
         currentAccounts.add(c1);
         currentAccounts.add(c2);
@@ -45,6 +46,10 @@ public class Main {
         depositAccounts.add(d3);
         depositAccounts.add(d4);
         depositAccounts.add(d5);
+
+
+        TUSaccounts.addAll(currentAccounts);
+        TUSaccounts.addAll(depositAccounts);
 
         ArrayList<BankOfficer> bankOfficers = new ArrayList<>();
         bankOfficers.add(b1);
@@ -60,51 +65,35 @@ public class Main {
         //new scanner
         Scanner sc = new Scanner(System.in);
         //Main menu
-        //display menu options
-        String input = "";
-        while (!input.equalsIgnoreCase("5")) {
-            System.out.println(
-                    "\nMain Menu\n1. Make a Deposit\n2. Make a Withdrawal\n3. Check Account Balance\n4. Staff Menu\n5. Exit"
-            );
-            //user selects menu item
-            input = sc.next();
-            switch (input) {
-                case "1" -> depositFunds();
-                case "2" -> withdrawFunds();
-                case "3" -> checkBalance(currentAccounts, depositAccounts, customers);
-                case "4" -> staffMenu(currentAccounts, depositAccounts, customers, bankManagers, bankOfficers);
-                case "5" -> System.exit(0);
-                default -> System.out.println("Invalid option. Please try again.");
+        //ask user if staff or customer
+        System.out.println("1. Customer Menu\n2. Staff Menu");
+        int choice = sc.nextInt();
+        if (choice == 1) {
+            //ask user for customer number
+            System.out.println("Please enter your customer number");
+            int customerNumber = sc.nextInt();//pass to all customer methods
+            //display menu options
+            String input = "";
+            while (!input.equalsIgnoreCase("5")) {
+                System.out.println(
+                        "\nMain Menu\n1. Make a Deposit\n2. Make a Withdrawal\n3. Check Account Balance\n4. Exit"
+                );
+                //user selects menu item
+                input = sc.next();
+                switch (input) {
+                    case "1" -> depositFunds(TUSaccounts, customerNumber);
+                    case "2" -> withdrawFunds(TUSaccounts, customerNumber, customers);
+                    case "3" -> checkBalance(TUSaccounts, customerNumber, customers);
+                    case "4" -> System.exit(0);
+                    default -> System.out.println("Invalid option. Please try again.");
+                }
             }
-
+        } else if (choice == 2) {
+            staffMenu(TUSaccounts, customers, bankManagers, bankOfficers);
         }
-
     }
 
-    private static void withdrawFunds() {
-    }
-
-    private static void depositFunds() {
-
-    }
-
-    //Customer checks balance
-    private static void checkBalance(ArrayList<CurrentAccount> currentAccounts, ArrayList<DepositAccount> depositAccounts, ArrayList<Customer> customers) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Check Balance");
-
-        //ask the user for their account number
-        System.out.println("Please Enter your Customer number");
-        int custNo = Integer.parseInt(sc.next());
-        //get customer
-        Customer cust = CustomerIO.getCustomer(custNo);
-        customers.add(cust);
-        cust.checkBalance(custNo, currentAccounts, depositAccounts);
-
-    }
-
-    // Access the staff menu
-    private static void staffMenu(ArrayList<CurrentAccount> currentAccounts, ArrayList<DepositAccount> depositAccounts, ArrayList<Customer> customers, ArrayList<BankManager> bankManagers, ArrayList<BankOfficer> bankOfficers) {
+    private static void staffMenu(ArrayList<Account> TUSaccounts, ArrayList<Customer> customers, ArrayList<BankManager> bankManagers, ArrayList<BankOfficer> bankOfficers) {
         System.out.println("Please enter your staff number");
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
@@ -125,8 +114,8 @@ public class Main {
                     userInput = sc.next();
                     switch (userInput) {
                         case "1" -> staff.createNewCustomer(customers);
-                        case "2" -> staff.createNewCurrentAccount(currentAccounts);
-                        case "3" -> staff.createNewDepositAccount(depositAccounts);
+                        case "2" -> staff.createNewCurrentAccount(TUSaccounts);
+                        case "3" -> staff.createNewDepositAccount(TUSaccounts);
                         case "4" -> staff.changeCurrentAccAIR();
                         case "5" -> staff.changeDepositAccAIR();
                         case "6" -> staff.changeOverdraft();
@@ -137,6 +126,68 @@ public class Main {
                 }//end of while loop
             }//end of if statement
         }//end of for loop
-
     }//end of method
+
+
+    private static void checkBalance(ArrayList<Account> TUSaccounts, int customerNumber, ArrayList<Customer> customers) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Check Balance");
+
+        //get customer
+        Customer cust = CustomerIO.getCustomer(customerNumber);
+        customers.add(cust);
+        cust.checkBalance(customerNumber, TUSaccounts);
+    }
+
+
+    private static void depositFunds(ArrayList<Account> TUSaccounts, int customerNumber) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Deposit Funds");
+        int ans;
+
+        //ask the user which account to deposit into
+        System.out.println("\nWhich Account do you wish to deposit into?\n1. Current Account\n2. Deposit Account");
+        ans = sc.nextInt();
+
+        //check the array list for accounts with the corresponding customer number
+        for (Account account : TUSaccounts) {
+            if (account.getCustId() == customerNumber) { //finds the customers accounts
+                //check the type of account using instanceof operator
+                if (account instanceof CurrentAccount && ans == 1) {
+                    //Call the method to deposit money
+                    ((CurrentAccount) account).depositMoney(account);
+                } else if (account instanceof DepositAccount && ans == 2) {
+                    //Call the method to deposit money
+                    ((DepositAccount) account).depositMoney(account);
+                }
+            }
+        }
+
+    }
+
+    private static void withdrawFunds(ArrayList<Account> TUSaccounts, int customerNumber, ArrayList<Customer> customers) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Withdraw Funds");
+        int ans;
+
+        //ask the user which account to withdraw from
+        System.out.println("\nWhich Account do you wish to withdraw from?\n1. Current Account\n2. Deposit Account");
+        ans = sc.nextInt();
+
+        //check the array list for accounts with the corresponding customer number
+        for (Account account : TUSaccounts) {
+            if (account.getCustId() == customerNumber) { //finds the customers accounts
+                //check the type of account using instanceof operator & if the user chose this account
+                if (account instanceof CurrentAccount && ans == 1) {
+                    //Call the method to withdraw money
+                    ((CurrentAccount) account).withdrawMoney(account);
+                } else if (account instanceof DepositAccount && ans == 2) {
+                    //Call the method to withdraw money
+                    ((DepositAccount) account).withdrawMoney(account);
+                }
+            }
+        }
+
+    }
 }
