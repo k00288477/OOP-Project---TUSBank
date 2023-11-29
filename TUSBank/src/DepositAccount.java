@@ -25,7 +25,7 @@ public class DepositAccount extends Account {
     }
 
     //methods
-    public static void withdrawMoney(Account account){
+    public void withdrawMoney(Account account){
         Scanner sc = new Scanner(System.in);
         System.out.println("Withdrawing from Deposit Account");
 
@@ -51,21 +51,25 @@ public class DepositAccount extends Account {
     public void depositMoney(Account account){
         Scanner sc = new Scanner(System.in);
         double deposit;
+        double interest;
 
         System.out.println("Deposit into Deposit Account");
         //display current balance, ask user how much they want to deposit
         System.out.printf("\nYour balance is €%.2f.\nHow much would you like to deposit? (Enter zero to exit)", account.getBalance());
         //read in amount
         deposit = sc.nextDouble();
+        //calculate interest
+        interest = deposit * getDepositAccAIR();
         //set new balance
-        account.setBalance(account.getBalance() + deposit);
+        account.setBalance(account.getBalance() + deposit + interest);
         //display new balance
-        System.out.printf("Deposit Successful!\nYour new balance is €%.2f\n", account.getBalance());
+        System.out.printf("Interest earned: €%.2f.\nDeposit Successful!\nYour new balance is €%.2f\n", interest, account.getBalance());
     }
+
     //String Format
 
     @Override
     public String toString() {
-        return String.format(super.toString() + "\nDeposit Account AIR: %.2f", getDepositAccAIR());
+        return String.format(super.toString() + "\nDeposit Account AIR: %.3f", getDepositAccAIR());
     }
 }

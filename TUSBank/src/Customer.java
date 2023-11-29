@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Customer extends Person {
     //attributes
@@ -32,7 +33,12 @@ public class Customer extends Person {
     //methods
 
 
-    public void checkBalance(int customerNumber, ArrayList<Account> TUSaccounts) {
+    public void checkBalance(ArrayList<Account> TUSaccounts, int customerNumber,  ArrayList<Customer> customers) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Check Balance");
+
+
+
         //check the array list for accounts with the corresponding customer number
         for (Account account : TUSaccounts) {
             if (account.getCustId() == customerNumber) {
@@ -43,6 +49,58 @@ public class Customer extends Person {
                 } else if (account instanceof DepositAccount) {
                     //Call the method to withdraw money
                     System.out.println("Your Deposit account balance is: €" + account.getBalance());
+                }
+            }
+        }
+    }
+
+    public void withdrawFunds(ArrayList<Account> TUSaccounts, int customerNumber, ArrayList<Customer> customers){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Withdraw Funds");
+        int ans;
+
+        //ask the user which account to withdraw from
+        System.out.println("\nWhich Account do you wish to withdraw from?\n1. Current Account\n2. Deposit Account");
+        ans = sc.nextInt();
+
+        //check the array list for accounts with the corresponding customer number
+        for (Account account : TUSaccounts) {
+            if (account.getCustId() == customerNumber) { //finds the customers accounts
+                //check the type of account using instanceof operator & if the user chose this account
+                if (account instanceof CurrentAccount && ans == 1) {
+                    //Call the method to withdraw money
+                    ((CurrentAccount) account).withdrawMoney(account);
+                } else if (account instanceof DepositAccount && ans == 2) {
+                    //Call the method to withdraw money
+                    ((DepositAccount) account).withdrawMoney(account);
+                }
+            }
+        }
+
+    }
+
+
+
+    public void depositFunds(ArrayList<Account> TUSaccounts, int customerNumber){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Deposit Funds");
+        int ans;
+
+        //ask the user which account to deposit into
+        System.out.println("\nWhich Account do you wish to deposit into?\n1. Current Account\n2. Deposit Account");
+        ans = sc.nextInt();
+
+        //check the array list for accounts with the corresponding customer number
+        for (Account account : TUSaccounts) {
+            if (account.getCustId() == customerNumber) { //finds the customers accounts
+                //check the type of account using instanceof operator
+                if (account instanceof CurrentAccount && ans == 1) {
+                    //Call the method to deposit money
+                    ((CurrentAccount) account).depositMoney(account);
+                } else if (account instanceof DepositAccount && ans == 2) {
+                    //Call the method to deposit money
+                    ((DepositAccount) account).depositMoney(account);
                 }
             }
         }

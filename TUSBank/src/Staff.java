@@ -115,13 +115,78 @@ public class Staff extends Person {
         accounts.add(d);
     }
 
-    protected void changeDepositAccAIR(){}
+    protected void changeDepositAccAIR(ArrayList<Account> TUSaccounts){
+        Scanner sc = new Scanner(System.in);
+        double newAIR;
 
-    protected void changeCurrentAccAIR(){}
+                    //display current AIR
+                    System.out.printf("The current Annual Interest Rate (AIR) on Deposit Accounts is: %.3f%%\n", DepositAccount.getDepositAccAIR());
+                    //ask for new AIR
+                    System.out.println("Please enter the new AIR:");
+                    newAIR = sc.nextDouble();
+                    //set the new AIR
+                    DepositAccount.setDepositAccAIR(newAIR);
+                    //display new AIR
+                    System.out.printf("The new Annual Interest Rate for Deposit Accounts is: %.3f%%.\n", DepositAccount.getDepositAccAIR());
+                }
 
-    protected void changeOverdraft(){}
 
-    protected void printAllAccounts(){}
+
+
+
+
+    protected void changeCurrentAccAIR(ArrayList<Account> TUSaccounts){
+        Scanner sc = new Scanner(System.in);
+        double newAIR;
+
+                    //display current AIR
+                    System.out.printf("The current Annual Interest Rate (AIR) on the Current Account is: %.3f%%\n", CurrentAccount.getCurrentAccAir());
+                    //ask for new AIR
+                    System.out.println("Please enter the new AIR:");
+                    newAIR = sc.nextDouble();
+                    //set the new AIR
+                    CurrentAccount.setCurrentAccAir(newAIR);
+                    //display new AIR
+                    System.out.printf("The new Annual Interest Rate for Current Accounts is: %.3f%%.\n", CurrentAccount.getCurrentAccAir());
+                }
+
+    protected void changeOverdraft(ArrayList<Account> TUSaccounts){
+        Scanner sc = new Scanner(System.in);
+        int customerNumber;
+        double overdraft;
+
+        //user enters customer number
+        System.out.println("Please enter the customer number:");
+        customerNumber = sc.nextInt();
+        //find customer Current Account
+        for(Account account : TUSaccounts){
+            if(customerNumber == account.getCustId() && account instanceof CurrentAccount){
+                //display overdraft
+                System.out.printf("The accounts current overdraft is: €%.2f\n", ((CurrentAccount) account).getOverdraft());
+                //ask for new overdraft value
+                System.out.println("Please enter the new Overdraft:");
+                overdraft = sc.nextDouble();
+                //set new overdraft value
+                ((CurrentAccount) account).setOverdraft(overdraft);
+                //display the new overdraft
+                System.out.printf("The new Overdraft for Customer Number: %d, is €%.2f\n", customerNumber, ((CurrentAccount) account).getOverdraft());
+            }
+        }
+    }
+
+    protected void printAllAccounts(ArrayList<Account> TUSaccounts){
+        System.out.println("List of all Accounts");
+
+        //for each loop to iterate through the array
+        for(Account account : TUSaccounts){
+            //sort between current account and deposit
+            if (account instanceof CurrentAccount){
+                System.out.println("\nAccount type: Current Account\n" + account.toString());
+            } else if (account instanceof DepositAccount) {
+                System.out.println("\nAccount type: Deposit Account\n" + account.toString());
+            }
+        }
+    }
 
 
     //String Format

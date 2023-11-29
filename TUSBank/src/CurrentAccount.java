@@ -62,16 +62,19 @@ public class CurrentAccount extends Account {
     public void depositMoney(Account account){
         Scanner sc = new Scanner(System.in);
         double deposit;
+        double interest;
 
         System.out.println("Deposit into Current Account");
         //display current balance, ask user how much they want to deposit
         System.out.printf("\nYour balance is €%.2f.\nHow much would you like to deposit? (Enter zero to exit)", account.getBalance());
         //read in amount
         deposit = sc.nextDouble();
+        //calculate interest
+        interest = deposit * getCurrentAccAir();
         //set new balance
         account.setBalance(account.getBalance() + deposit);
         //display new balance
-        System.out.printf("Deposit Successful!\nYour new balance is €%.2f\n", account.getBalance());
+        System.out.printf("Interest earned: €%.2f.\nDeposit Successful!\nYour new balance is €%.2f\n", interest, account.getBalance());
 
 
 
