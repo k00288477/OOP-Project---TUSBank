@@ -9,39 +9,15 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //current acc
-        LocalDate x = LocalDate.of(2023, 11, 22);
-        CurrentAccount c1 = new CurrentAccount(1, 1000, 200.20, x, 0.5);
-
-        //deposit acc
-        LocalDate y = LocalDate.of(2023, 11, 22);
-        DepositAccount d1 = new DepositAccount(6, 1000, 200000.00, y);
-
-        Address a1 = new Address("789", "Pine Lane", "Greenfield", "DEF789");
-        //bank officer
-        BankOfficer b1 = new BankOfficer("Anna", "Pearse", a1, 123, Position.BANKOFFICER, 40000.00);
-        //bank manager
-        BankManager bm1 = new BankManager("John", "Boyega", a1, 1234, Position.BANKMANAGER, 50000.00);
-
-        //initialise array lists
-        ArrayList<Account> TUSaccounts = new ArrayList<>();
-
+        ArrayList<Account> tusAccounts = new ArrayList<>();
         ArrayList<CurrentAccount> currentAccounts = new ArrayList<>();
-        currentAccounts.add(c1);
-
         ArrayList<DepositAccount> depositAccounts = new ArrayList<>();
-        depositAccounts.add(d1);
-
-        TUSaccounts.addAll(currentAccounts);
-        TUSaccounts.addAll(depositAccounts);
-
-        ArrayList<BankOfficer> bankOfficers = new ArrayList<>();
-        bankOfficers.add(b1);
-
         ArrayList<Customer> customers = new ArrayList<>();
-
+        ArrayList<BankOfficer> bankOfficers = new ArrayList<>();
         ArrayList<BankManager> bankManagers = new ArrayList<>();
-        bankManagers.add(bm1);
+        //initialize array lists
+        initializeTestData(tusAccounts, currentAccounts, depositAccounts, customers, bankOfficers, bankManagers);
+
 
 
         //Welcome Message
@@ -71,9 +47,9 @@ public class Main {
                 //user selects menu item
                 input = sc.next();
                 switch (input) {
-                    case "1" -> cust.depositFunds(TUSaccounts, customerNumber);
-                    case "2" -> cust.withdrawFunds(TUSaccounts, customerNumber, customers);
-                    case "3" -> cust.checkBalance(TUSaccounts, customerNumber, customers);
+                    case "1" -> cust.depositFunds(tusAccounts, customerNumber);
+                    case "2" -> cust.withdrawFunds(tusAccounts, customerNumber, customers);
+                    case "3" -> cust.checkBalance(tusAccounts, customerNumber, customers);
                     case "4" -> {
                         System.out.println("\nGoodbye.");
                         System.exit(0);
@@ -92,7 +68,6 @@ public class Main {
                 if (input == bankOfficers.get(i).getStaffId()) {
                     //assign staff
                     staff = bankOfficers.get(i);
-
                     //sentinel loop for menu, menu will not close until user specifies
                     //will be able to call multiple methods in single session
                     String userInput = "";
@@ -105,12 +80,12 @@ public class Main {
                         userInput = sc.next();
                         switch (userInput) {
                             case "1" -> staff.createNewCustomer(customers);
-                            case "2" -> staff.createNewCurrentAccount(TUSaccounts);
-                            case "3" -> staff.createNewDepositAccount(TUSaccounts);
-                            case "4" -> staff.changeCurrentAccAIR(TUSaccounts);
-                            case "5" -> staff.changeDepositAccAIR(TUSaccounts);
-                            case "6" -> staff.changeOverdraft(TUSaccounts);
-                            case "7" -> staff.printAllAccounts(TUSaccounts);
+                            case "2" -> staff.createNewCurrentAccount(tusAccounts);
+                            case "3" -> staff.createNewDepositAccount(tusAccounts);
+                            case "4" -> staff.changeCurrentAccAIR(tusAccounts);
+                            case "5" -> staff.changeDepositAccAIR(tusAccounts);
+                            case "6" -> staff.changeOverdraft(tusAccounts);
+                            case "7" -> staff.printAllAccounts(tusAccounts);
                             case "8" -> createNewBankOfficer(bankManagers, bankOfficers);
                             case "9" -> {
                                 System.out.println("\nGoodbye.");
@@ -135,15 +110,37 @@ public class Main {
 
         //check that staffID is in bank manager list
         //for each loop
-        for(BankManager bankManager : bankManagers){
+        for (BankManager bankManager : bankManagers) {
             //compare staff id
-            if(staffId == bankManager.getStaffId()){
+            if (staffId == bankManager.getStaffId()) {
                 // call method in bank manager class
                 bankManager.createBankOfficer(bankOfficers);
 
             }
         }
 
+    }
+
+    private static void initializeTestData(ArrayList<Account> tusAccounts, ArrayList<CurrentAccount> currentAccounts,
+                                           ArrayList<DepositAccount> depositAccounts, ArrayList<Customer> customers,
+                                           ArrayList<BankOfficer> bankOfficers, ArrayList<BankManager> bankManagers) {
+        LocalDate x = LocalDate.of(2023, 11, 22);
+        CurrentAccount c1 = new CurrentAccount(1, 1000, 200.20, x, 0.5);
+        currentAccounts.add(c1);
+
+        LocalDate y = LocalDate.of(2023, 11, 22);
+        DepositAccount d1 = new DepositAccount(6, 1000, 200000.00, y);
+        depositAccounts.add(d1);
+
+        Address a1 = new Address("789", "Pine Lane", "Greenfield", "DEF789");
+        BankOfficer b1 = new BankOfficer("Anna", "Pearse", a1, 123, Position.BANKOFFICER, 40000.00);
+        bankOfficers.add(b1);
+
+        BankManager bm1 = new BankManager("John", "Boyega", a1, 1234, Position.BANKMANAGER, 50000.00);
+        bankManagers.add(bm1);
+
+        tusAccounts.addAll(currentAccounts);
+        tusAccounts.addAll(depositAccounts);
     }
 }//end of main
 

@@ -115,7 +115,7 @@ public class Staff extends Person {
         accounts.add(d);
     }
 
-    protected void changeDepositAccAIR(ArrayList<Account> TUSaccounts){
+    protected void changeDepositAccAIR(ArrayList<Account> tusAccounts){
         Scanner sc = new Scanner(System.in);
         double newAIR;
 
@@ -135,7 +135,7 @@ public class Staff extends Person {
 
 
 
-    protected void changeCurrentAccAIR(ArrayList<Account> TUSaccounts){
+    protected void changeCurrentAccAIR(ArrayList<Account> tusAccounts){
         Scanner sc = new Scanner(System.in);
         double newAIR;
 
@@ -150,7 +150,7 @@ public class Staff extends Person {
                     System.out.printf("The new Annual Interest Rate for Current Accounts is: %.3f%%.\n", CurrentAccount.getCurrentAccAir());
                 }
 
-    protected void changeOverdraft(ArrayList<Account> TUSaccounts){
+    protected void changeOverdraft(ArrayList<Account> tusAccounts){
         Scanner sc = new Scanner(System.in);
         int customerNumber;
         double overdraft;
@@ -159,7 +159,7 @@ public class Staff extends Person {
         System.out.println("Please enter the customer number:");
         customerNumber = sc.nextInt();
         //find customer Current Account
-        for(Account account : TUSaccounts){
+        for(Account account : tusAccounts){
             if(customerNumber == account.getCustId() && account instanceof CurrentAccount){
                 //display overdraft
                 System.out.printf("The accounts current overdraft is: €%.2f\n", ((CurrentAccount) account).getOverdraft());
@@ -174,11 +174,11 @@ public class Staff extends Person {
         }
     }
 
-    protected void printAllAccounts(ArrayList<Account> TUSaccounts){
+    protected void printAllAccounts(ArrayList<Account> tusAccounts){
         System.out.println("List of all Accounts");
 
         //for each loop to iterate through the array
-        for(Account account : TUSaccounts){
+        for(Account account : tusAccounts){
             //sort between current account and deposit
             if (account instanceof CurrentAccount){
                 System.out.println("\nAccount type: Current Account\n" + account.toString());

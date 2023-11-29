@@ -33,14 +33,14 @@ public class Customer extends Person {
     //methods
 
 
-    public void checkBalance(ArrayList<Account> TUSaccounts, int customerNumber,  ArrayList<Customer> customers) {
+    public void checkBalance(ArrayList<Account> tusAccounts, int customerNumber,  ArrayList<Customer> customers) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Check Balance");
 
 
 
         //check the array list for accounts with the corresponding customer number
-        for (Account account : TUSaccounts) {
+        for (Account account : tusAccounts) {
             if (account.getCustId() == customerNumber) {
                 //check the type of account using instanceof operator
                 if (account instanceof CurrentAccount) {
@@ -54,7 +54,7 @@ public class Customer extends Person {
         }
     }
 
-    public void withdrawFunds(ArrayList<Account> TUSaccounts, int customerNumber, ArrayList<Customer> customers){
+    public void withdrawFunds(ArrayList<Account> tusAccounts, int customerNumber, ArrayList<Customer> customers){
         Scanner sc = new Scanner(System.in);
         System.out.println("Withdraw Funds");
         int ans;
@@ -64,7 +64,7 @@ public class Customer extends Person {
         ans = sc.nextInt();
 
         //check the array list for accounts with the corresponding customer number
-        for (Account account : TUSaccounts) {
+        for (Account account : tusAccounts) {
             if (account.getCustId() == customerNumber) { //finds the customers accounts
                 //check the type of account using instanceof operator & if the user chose this account
                 if (account instanceof CurrentAccount && ans == 1) {
@@ -81,7 +81,7 @@ public class Customer extends Person {
 
 
 
-    public void depositFunds(ArrayList<Account> TUSaccounts, int customerNumber){
+    public void depositFunds(ArrayList<Account> tusAccounts, int customerNumber){
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Deposit Funds");
@@ -92,7 +92,7 @@ public class Customer extends Person {
         ans = sc.nextInt();
 
         //check the array list for accounts with the corresponding customer number
-        for (Account account : TUSaccounts) {
+        for (Account account : tusAccounts) {
             if (account.getCustId() == customerNumber) { //finds the customers accounts
                 //check the type of account using instanceof operator
                 if (account instanceof CurrentAccount && ans == 1) {
