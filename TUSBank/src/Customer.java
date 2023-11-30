@@ -37,8 +37,6 @@ public class Customer extends Person {
         Scanner sc = new Scanner(System.in);
         System.out.println("Check Balance");
 
-
-
         //check the array list for accounts with the corresponding customer number
         for (Account account : tusAccounts) {
             if (account.getCustId() == customerNumber) {
@@ -83,7 +81,6 @@ public class Customer extends Person {
 
     public void depositFunds(ArrayList<Account> tusAccounts, int customerNumber){
         Scanner sc = new Scanner(System.in);
-
         System.out.println("Deposit Funds");
         int ans;
 

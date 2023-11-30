@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class TUSATM {
     public static void main(String[] args) {
         ArrayList<Account> tusAccounts = new ArrayList<>();
         ArrayList<CurrentAccount> currentAccounts = new ArrayList<>();
@@ -17,7 +17,6 @@ public class Main {
         ArrayList<BankManager> bankManagers = new ArrayList<>();
         //initialize array lists
         initializeTestData(tusAccounts, currentAccounts, depositAccounts, customers, bankOfficers, bankManagers);
-
 
 
         //Welcome Message
@@ -115,8 +114,7 @@ public class Main {
             if (staffId == bankManager.getStaffId()) {
                 // call method in bank manager class
                 bankManager.createBankOfficer(bankOfficers);
-
-            }
+            } else System.out.println("staffId invalid");
         }
 
     }
