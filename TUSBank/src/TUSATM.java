@@ -13,10 +13,11 @@ public class TUSATM {
         ArrayList<CurrentAccount> currentAccounts = new ArrayList<>();
         ArrayList<DepositAccount> depositAccounts = new ArrayList<>();
         ArrayList<Customer> customers = new ArrayList<>();
+        ArrayList<Staff> staffMembers = new ArrayList<>();
         ArrayList<BankOfficer> bankOfficers = new ArrayList<>();
         ArrayList<BankManager> bankManagers = new ArrayList<>();
         //initialize array lists
-        initializeTestData(tusAccounts, currentAccounts, depositAccounts, customers, bankOfficers, bankManagers);
+        initializeTestData(tusAccounts, currentAccounts, depositAccounts, customers, bankOfficers, bankManagers, staffMembers);
 
 
         //Welcome Message
@@ -60,13 +61,11 @@ public class TUSATM {
         } else if (choice == 2) {
             System.out.println("Please enter your staff number");
             int input = sc.nextInt();
-            Staff staff = null;
 
             //Check staff object exists
-            for (int i = 0; i < bankOfficers.size(); i++) {
-                if (input == bankOfficers.get(i).getStaffId()) {
-                    //assign staff
-                    staff = bankOfficers.get(i);
+            for (Staff staff : staffMembers) {
+                if (input == staff.getStaffId()) {
+
                     //sentinel loop for menu, menu will not close until user specifies
                     //will be able to call multiple methods in single session
                     String userInput = "";
@@ -85,7 +84,7 @@ public class TUSATM {
                             case "5" -> staff.changeDepositAccAIR(tusAccounts);
                             case "6" -> staff.changeOverdraft(tusAccounts);
                             case "7" -> staff.printAllAccounts(tusAccounts);
-                            case "8" -> createNewBankOfficer(bankManagers, bankOfficers);
+                            case "8" -> createNewBankOfficer(bankManagers, bankOfficers, staffMembers);
                             case "9" -> {
                                 System.out.println("\nGoodbye.");
                                 System.exit(0);
@@ -99,7 +98,7 @@ public class TUSATM {
         }
     }
 
-    private static void createNewBankOfficer(ArrayList<BankManager> bankManagers, ArrayList<BankOfficer> bankOfficers) {
+    private static void createNewBankOfficer(ArrayList<BankManager> bankManagers, ArrayList<BankOfficer> bankOfficers, ArrayList<Staff> staffMembers) {
         Scanner sc = new Scanner(System.in);
         int staffId;
 
@@ -113,15 +112,15 @@ public class TUSATM {
             //compare staff id
             if (staffId == bankManager.getStaffId()) {
                 // call method in bank manager class
-                bankManager.createBankOfficer(bankOfficers);
-            } else System.out.println("staffId invalid");
+                bankManager.createBankOfficer(bankOfficers, staffMembers);
+            } else System.out.println("Staff ID invalid");
         }
 
     }
 
     private static void initializeTestData(ArrayList<Account> tusAccounts, ArrayList<CurrentAccount> currentAccounts,
                                            ArrayList<DepositAccount> depositAccounts, ArrayList<Customer> customers,
-                                           ArrayList<BankOfficer> bankOfficers, ArrayList<BankManager> bankManagers) {
+                                           ArrayList<BankOfficer> bankOfficers, ArrayList<BankManager> bankManagers, ArrayList<Staff> staffMembers) {
         LocalDate x = LocalDate.of(2023, 11, 22);
         CurrentAccount c1 = new CurrentAccount(1, 1000, 200.20, x, 0.5);
         currentAccounts.add(c1);
@@ -139,6 +138,9 @@ public class TUSATM {
 
         tusAccounts.addAll(currentAccounts);
         tusAccounts.addAll(depositAccounts);
+        staffMembers.addAll(bankManagers);
+        staffMembers.addAll(bankOfficers);
+
     }
 }//end of main
 

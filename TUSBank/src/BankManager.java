@@ -17,7 +17,7 @@ public class BankManager extends Staff{
     }
 
     //methods
-    public void createBankOfficer(ArrayList<BankOfficer> bankOfficers){
+    public void createBankOfficer(ArrayList<BankOfficer> bankOfficers, ArrayList<Staff> staffMembers){
         //Create a new Bank Officer Object
         Scanner sc = new Scanner(System.in);
         System.out.println("Please Enter the Bank Officer's details");
@@ -40,7 +40,7 @@ public class BankManager extends Staff{
         BankOfficer b = new BankOfficer(attributeValues[0], attributeValues[1], a, Integer.parseInt(attributeValues[6]), position, Double.parseDouble(attributeValues[7]));
 
         // Add to the bankOfficers list
-        bankOfficers.add(b);
+        staffMembers.add(b);
     }
 
     //string Format
