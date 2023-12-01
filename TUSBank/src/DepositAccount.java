@@ -9,10 +9,9 @@ public class DepositAccount extends Account {
     public DepositAccount(
             int accountId,
             int custId,
-            double balance,
-            LocalDate dateCreated
+            double balance
     ) {
-        super(accountId, custId, balance, dateCreated);
+        super(accountId, custId, balance);
     }
 
     //getters & setters

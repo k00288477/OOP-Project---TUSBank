@@ -11,13 +11,12 @@ public abstract class Account {
     protected Account(
             int accountId,
             int custId,
-            double balance,
-            LocalDate dateCreated
+            double balance
     ) {
         this.accountId = accountId;
         this.custId = custId;
         this.balance = balance;
-        this.dateCreated = dateCreated;
+        this.dateCreated = LocalDate.now();
     }
 
     //getters&setters
@@ -50,9 +49,6 @@ public abstract class Account {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
-        this.dateCreated = dateCreated;
-    }
 
     //String Format
 

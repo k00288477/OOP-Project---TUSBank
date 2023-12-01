@@ -12,15 +12,14 @@ public class CurrentAccount extends Account {
             int accountId,
             int custId,
             double balance,
-            LocalDate dateCreated,
             double overdraft
     ) {
-        super(accountId, custId, balance, dateCreated);
+        super(accountId, custId, balance);
         this.overdraft = overdraft;
     }
 
     //getters & setters
-    //inherited from Account
+
     public static double getCurrentAccAir() {
         return currentAccAir;
     }

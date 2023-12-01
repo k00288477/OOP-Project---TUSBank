@@ -48,8 +48,8 @@ public class TUSATM {
                 input = sc.next();
                 switch (input) {
                     case "1" -> cust.depositFunds(tusAccounts, customerNumber);
-                    case "2" -> cust.withdrawFunds(tusAccounts, customerNumber, customers);
-                    case "3" -> cust.checkBalance(tusAccounts, customerNumber, customers);
+                    case "2" -> cust.withdrawFunds(tusAccounts, customerNumber);
+                    case "3" -> cust.checkBalance(tusAccounts, customerNumber);
                     case "4" -> {
                         System.out.println("\nGoodbye.");
                         System.exit(0);
@@ -72,7 +72,7 @@ public class TUSATM {
                     while (!userInput.equalsIgnoreCase("9")) {
                         //display menu
                         System.out.println(
-                                "\nStaff Menu\n1. Create new Customer\n2. Create New Current Account\n3. Create New Deposit Account\n4. Change Current Account AIR\n5. Change deposit Account AIR\n6. Change Overdraft\n7. Print All Accounts\n8. Create new Bank Officer\n9. Cancel"
+                                "\nStaff Menu\n1. Create new Customer\n2. Create New Current Account\n3. Create New Deposit Account\n4. Change Current Account AIR\n5. Change deposit Account AIR\n6. Change Overdraft\n7. Print All Accounts\n8. Create new Bank Officer\n9. Exit"
                         );
                         //user selects menu item
                         userInput = sc.next();
@@ -121,12 +121,12 @@ public class TUSATM {
     private static void initializeTestData(ArrayList<Account> tusAccounts, ArrayList<CurrentAccount> currentAccounts,
                                            ArrayList<DepositAccount> depositAccounts, ArrayList<Customer> customers,
                                            ArrayList<BankOfficer> bankOfficers, ArrayList<BankManager> bankManagers, ArrayList<Staff> staffMembers) {
-        LocalDate x = LocalDate.of(2023, 11, 22);
-        CurrentAccount c1 = new CurrentAccount(1, 1000, 200.20, x, 0.5);
+
+        CurrentAccount c1 = new CurrentAccount(1, 1000, 200.20, 0.5);
         currentAccounts.add(c1);
 
-        LocalDate y = LocalDate.of(2023, 11, 22);
-        DepositAccount d1 = new DepositAccount(6, 1000, 200000.00, y);
+
+        DepositAccount d1 = new DepositAccount(6, 1000, 200000.00);
         depositAccounts.add(d1);
 
         Address a1 = new Address("789", "Pine Lane", "Greenfield", "DEF789");

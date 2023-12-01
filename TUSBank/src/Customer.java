@@ -33,7 +33,7 @@ public class Customer extends Person {
     //methods
 
 
-    public void checkBalance(ArrayList<Account> tusAccounts, int customerNumber,  ArrayList<Customer> customers) {
+    public void checkBalance(ArrayList<Account> tusAccounts, int customerNumber) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Check Balance");
 
@@ -48,11 +48,11 @@ public class Customer extends Person {
                     //Call the method to withdraw money
                     System.out.println("Your Deposit account balance is: €" + account.getBalance());
                 }
-            }
+            } else System.out.println("Accounts not found");
         }
     }
 
-    public void withdrawFunds(ArrayList<Account> tusAccounts, int customerNumber, ArrayList<Customer> customers){
+    public void withdrawFunds(ArrayList<Account> tusAccounts, int customerNumber){
         Scanner sc = new Scanner(System.in);
         System.out.println("Withdraw Funds");
         int ans;

@@ -76,7 +76,7 @@ public class Staff extends Person {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please Enter the current account details");
         // Define the attributes in an array
-        String[] attributeNames = {"Account id", "Customer Id", "Balance", "Year", "Month", "Day", "Overdraft"};
+        String[] attributeNames = {"Account id", "Customer Id", "Balance", "Overdraft"};
         String[] attributeValues = new String[attributeNames.length];
 
         // Use a for loop to ask the user to input values for each attribute
@@ -86,8 +86,7 @@ public class Staff extends Person {
         }
 
         // Build the objects
-        LocalDate a = LocalDate.of(Integer.parseInt(attributeValues[3]), Integer.parseInt(attributeValues[4]), Integer.parseInt(attributeValues[5]));
-        CurrentAccount c = new CurrentAccount(Integer.parseInt(attributeValues[0]), Integer.parseInt(attributeValues[1]), Double.parseDouble(attributeValues[2]), a, Double.parseDouble(attributeValues[6]));
+        CurrentAccount c = new CurrentAccount(Integer.parseInt(attributeValues[0]), Integer.parseInt(attributeValues[1]), Double.parseDouble(attributeValues[2]), Double.parseDouble(attributeValues[3]));
 
         // Add the created customer to the ArrayList
         accounts.add(c);
@@ -98,7 +97,7 @@ public class Staff extends Person {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please Enter the deposit account details");
         // Define the attributes in an array
-        String[] attributeNames = {"Account id", "Customer Id", "Balance", "Year", "Month", "Day", "Overdraft"};
+        String[] attributeNames = {"Account id", "Customer Id", "Balance"};
         String[] attributeValues = new String[attributeNames.length];
 
         // Use a for loop to ask the user to input values for each attribute
@@ -108,8 +107,7 @@ public class Staff extends Person {
         }
 
         // Build the objects
-        LocalDate a = LocalDate.of(Integer.parseInt(attributeValues[3]), Integer.parseInt(attributeValues[4]), Integer.parseInt(attributeValues[5]));
-        DepositAccount d = new DepositAccount(Integer.parseInt(attributeValues[0]), Integer.parseInt(attributeValues[1]), Double.parseDouble(attributeValues[2]), a);
+        DepositAccount d = new DepositAccount(Integer.parseInt(attributeValues[0]), Integer.parseInt(attributeValues[1]), Double.parseDouble(attributeValues[2]));
 
         // Add the created customer to the ArrayList
         accounts.add(d);
@@ -162,14 +160,14 @@ public class Staff extends Person {
         for(Account account : tusAccounts){
             if(customerNumber == account.getCustId() && account instanceof CurrentAccount){
                 //display overdraft
-                System.out.printf("The accounts current overdraft is: €%.2f\n", ((CurrentAccount) account).getOverdraft());
+                System.out.printf("The accounts current overdraft is: %.2f%%\n", ((CurrentAccount) account).getOverdraft());
                 //ask for new overdraft value
                 System.out.println("Please enter the new Overdraft:");
                 overdraft = sc.nextDouble();
                 //set new overdraft value
                 ((CurrentAccount) account).setOverdraft(overdraft);
                 //display the new overdraft
-                System.out.printf("The new Overdraft for Customer Number: %d, is €%.2f\n", customerNumber, ((CurrentAccount) account).getOverdraft());
+                System.out.printf("The new Overdraft for Customer Number: %d, is %.2f%%\n", customerNumber, ((CurrentAccount) account).getOverdraft());
             }
         }
     }
