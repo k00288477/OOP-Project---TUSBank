@@ -5,3 +5,5 @@ Created on 2023-11-08
 Task:
 Create a Java application for a bank
 - Classes (inheritence, abstract classes, proper data encapsulation)
+
+https://github.com/k00288477/OOP-Project---TUSBank
